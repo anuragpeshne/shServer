@@ -1,0 +1,28 @@
+{
+  "name": "shserver",
+  "version": "1.0.0",
+  "description": "shell server",
+  "main": "server.js",
+  "dependencies": {
+    "livescript": "^1.4.0",
+    "prelude-ls": "^1.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuragpeshne/shServer.git"
+  },
+  "keywords": [
+    "shell",
+    "node"
+  ],
+  "author": "anurag peshne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anuragpeshne/shServer/issues"
+  },
+  "homepage": "https://github.com/anuragpeshne/shServer#readme"
+}
