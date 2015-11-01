@@ -15,4 +15,4 @@ exports.parse = do ->
         flags: commandList.slice 1 |>
                 filter ((element) -> (element.match /^-\w+$/) != null)
         args: commandList.slice 1 |>
-                filter ((element) -> (element.match /^[\w\/'"]+$/) != null)
+                filter ((element) -> (element.match /^[\w\/'"\.]+$/) != null)

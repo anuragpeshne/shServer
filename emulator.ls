@@ -3,10 +3,11 @@ childProccess = require 'child_process'
 exports = module.exports = {}
 
 exports.execute = (command) ->
-    result = childProccess.spawnSync command.program, command.args
+    # 10^6 ~= 1MB
+    result = childProccess.spawnSync command.program, command.args, maxBuffer: 1e6
     pid: result.pid
     status: parseInt result.status
-    output: result.stdout.toString 'utf-8'
+    output: result.output.toString 'utf-8'
     stdout: result.stdout.toString 'utf-8'
     stderr: result.stderr.toString 'utf-8'
     error: result.error
