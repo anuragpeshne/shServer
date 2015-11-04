@@ -33,6 +33,7 @@ server = http.createServer (req, res) ->
                 console.log parsedScript
                 result = emulator.execute parsedScript
                 res.writeHead 201
+                res.setHeader 'Content-Type', 'application/json'
                 res.end JSON.stringify result
         else
             res.writeHead 200
