@@ -1,5 +1,4 @@
 http = require 'http'
-qs = require 'querystring'
 parse = (require './parser.ls').parse
 emulator = require './emulator.ls'
 
@@ -14,7 +13,14 @@ context = do ->
 server = http.createServer (req, res) ->
     #TODO: get IP address of machine
     console.log req.connection.remoteAddress
-    if (['::1', ''].indexOf req.connection.remoteAddress) > -1
+
+    res.setHeader 'Access-Control-Allow-Origin', 'chrome-extension://glddbcoldkdllfmmmlghadjbocddhien'
+    # Request methods you wish to allow
+    res.setHeader 'Access-Control-Allow-Methods', 'GET, POST'
+
+    # Request headers you wish to allow
+    res.setHeader 'Access-Control-Allow-Headers', 'X-Requested-With,content-type'
+    if (['::1', '127.0.0.1', '::ffff:127.0.0.1'].indexOf req.connection.remoteAddress) > -1
         console.log req.connection.remoteAddress + ' connected'
         if req.method == 'POST'
             body = ''
@@ -27,8 +33,9 @@ server = http.createServer (req, res) ->
                 if body.length > 1e6
                     request.connection.destroy
 
-            req.on 'end', (data) ->
-                post = qs.parse body
+            req.on 'end', ->
+                post = JSON.parse body
+                console.log post
                 parsedScript = parse post['script']
                 console.log parsedScript
                 result = emulator.execute parsedScript
